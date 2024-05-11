@@ -1,12 +1,10 @@
-import {createBrowserRouter} from "react-router-dom";
-import AllProductView from "../view /AllProductView";
+import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import CounterView from "../view /CounterView";
-import ProductEditView from "../view /ProductEditView";
+import CatalogueView from "../view/CatalogueView";
+import LoginView from "../view/LoginView";
+import RegisterView from "../view/RegisterView";
 
-export const COUNTER_PATH = "/counter";
-export const ALL_PRODUCTS_VIEW_PATH = "/products";
-export const PRODUCT_EDIT_VIEW_PATH = "/product/:productId/edit";
+export const CATALOGUE_PATH = "/catalogue";
 
 const router = createBrowserRouter([
     {
@@ -18,20 +16,19 @@ const router = createBrowserRouter([
                 element: <div>TEst</div>,
             },
             {
-                path: COUNTER_PATH,
-                element: <CounterView/>,
+                path: CATALOGUE_PATH,
+                element: <CatalogueView/>,
             },
             {
-                path: ALL_PRODUCTS_VIEW_PATH,
-                element: <AllProductView/>,
+                path: "/",
+                element: <LoginView/>
             },
             {
-                path: PRODUCT_EDIT_VIEW_PATH,
-                element: <ProductEditView/>,
+                path: "/register",
+                element: <RegisterView/>
             }
         ]
     },
-
 ]);
 
 

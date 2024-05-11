@@ -1,6 +1,9 @@
 import INavbar from "./component/common/Navbar/INavbar";
 import {Outlet} from "react-router-dom";
 import {Container} from "react-bootstrap";
+import { useLocation } from 'react-router-dom';
+import LoginView from './view/LoginView';
+import { UserProvider } from "./data/UserProvider";
 
 
 function App() {
@@ -8,13 +11,12 @@ function App() {
 
     return (
         <>
-            <INavbar/>
-            <Container>
+        <UserProvider>
+            <Container>                
                 <Outlet></Outlet>
             </Container>
-
+        </UserProvider>
         </>
-
     );
 }
 
