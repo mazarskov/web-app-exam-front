@@ -2,14 +2,17 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import INavbar from '../component/common/Navbar/INavbar';
 import { useUser } from '../data/UserProvider';
+import { useNavigate } from 'react-router-dom' ;
 import './Styles.css'; // Import CSS file for component-specific styles
 import { Link } from 'react-router-dom';
+
 
 function BasketView() {
     const [basketList, setBasketList] = useState([]);
     const [accountData, setAccountData] = useState({});
     const { userData } = useUser();
     const { userId } = userData;
+    const navigate = useNavigate();
 
     const fetchAccountData = async () => {
         try {
@@ -46,6 +49,10 @@ function BasketView() {
             console.error(error)
         }
     }
+    const checkOut = async () => {
+        clearBasket()
+        navigate("/confirm")
+    }
 
     return (
         <div className="App">
@@ -58,7 +65,7 @@ function BasketView() {
                 ) : (
                     <ul className="basket-list">
                         <button onClick={clearBasket}>Clear basket</button>
-                        <button onClick={clearBasket}>Checkout</button>
+                        <button onClick={checkOut}>Checkout</button>
                         
                         {basketList.map((game) => (
                             <li key={game.id} className="basket-item">

@@ -6,6 +6,8 @@ import RegisterView from "../view/RegisterView";
 import BasketView from "../view/BasketView";
 import INavbar from "../component/common/Navbar/INavbar";
 import AccountView from "../view/AccountView";
+import AdminView from "../view/AdminView";
+import ConfirmationView from "../view/ConfirmationView";
 
 export const CATALOGUE_PATH = "/catalogue";
 export const REGISTER_PATH = "/register";
@@ -43,6 +45,14 @@ const router = createBrowserRouter([
             {
                 path: "/account",
                 element: <AccountView/>
+            },
+            {
+                path: "/admin",
+                element: <AdminView/>
+            },
+            {
+                path: "/confirm",
+                element: <ConfirmationView/>
             }
         ]
     },
