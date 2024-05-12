@@ -1,0 +1,12 @@
+body {
+    background-color: #008080;
+}
+
+.navigation {
+    background-color: green;
+}
+
+.buttons {
+    color: azure;
+    padding-right: 10px;
+}

@@ -3,12 +3,13 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom' ;
 import { useUser } from '../data/UserProvider';
+import "./Styles.css";
 
 function LoginView() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
-    const { setUserId } = useUser();
+    const { setUserData } = useUser();
 
     const handleLogin = async () => {
         try {
@@ -18,14 +19,17 @@ function LoginView() {
                     password: password
                 }
             });
+            
             if (response.data !== "") {
                 // Redirect to catalogue if login was successful
-                setUserId(response.data.id);
+                const userId = response.data.id;
+                const basket = response.data.basket;
+                setUserData({userId, basket});
                 navigate('/catalogue');
             }
 
-            console.log(response.data); // Handle successful login
-            console.log(response.data.id);
+            //console.log(response.data); // Handle successful login
+            //console.log(response.data.id);
         } catch (error) {
             console.error('Login failed:', error);
         }
@@ -33,15 +37,14 @@ function LoginView() {
 
     return (
         <>
-        <div>
+        <div className='App'>
             <h2>Login</h2>
             <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
             <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-            <Link to="/catalogue" onClick={handleLogin} >Log in</Link>
             <button type="submit" onClick={handleLogin}>Login</button>
         </div>
         <div>
-            <h1><Link to="/register">Create account</Link></h1>
+            <h1><Link to="/register" className='buttons'>Create account</Link></h1>
         </div>
         </>
     );

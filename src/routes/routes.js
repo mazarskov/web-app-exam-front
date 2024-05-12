@@ -3,8 +3,14 @@ import App from "../App";
 import CatalogueView from "../view/CatalogueView";
 import LoginView from "../view/LoginView";
 import RegisterView from "../view/RegisterView";
+import BasketView from "../view/BasketView";
+import INavbar from "../component/common/Navbar/INavbar";
+import AccountView from "../view/AccountView";
 
 export const CATALOGUE_PATH = "/catalogue";
+export const REGISTER_PATH = "/register";
+export const BASKET_PATH = "/basket"
+export const ACCOUNT_PATH = "/account"
 
 const router = createBrowserRouter([
     {
@@ -13,7 +19,10 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/test",
-                element: <div>TEst</div>,
+                element: <div>
+                    <INavbar/>
+                    TEst
+                    </div>,
             },
             {
                 path: CATALOGUE_PATH,
@@ -26,6 +35,14 @@ const router = createBrowserRouter([
             {
                 path: "/register",
                 element: <RegisterView/>
+            },
+            {
+                path: "/basket",
+                element: <BasketView/>
+            },
+            {
+                path: "/account",
+                element: <AccountView/>
             }
         ]
     },

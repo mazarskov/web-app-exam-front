@@ -1,0 +1,24 @@
+.main-color {
+    background-color: #008080;
+}
+
+.buttons {
+    color: azure;
+    padding-right: 10px;
+}
+
+.basket-container {
+    margin: 20px;
+}
+
+.basket-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.basket-item {
+    border: 1px solid #ccc; /* Add a border to each game item */
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
