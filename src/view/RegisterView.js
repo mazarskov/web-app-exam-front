@@ -21,13 +21,12 @@ function RegisterView() {
                 }
               });
               if (response.data !== "") {
-                // Redirect to catalogue if login was successful
                 const userId = response.data.id;
                 const basket = response.data.basket;
                 setUserData({userId, basket});
                 navigate('/catalogue');
             }
-            console.log(response.data); // Handle successful registration
+            console.log(response.data);
         } catch (error) {
             console.error('Registration failed:', error);
         }

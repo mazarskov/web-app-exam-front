@@ -21,15 +21,11 @@ function LoginView() {
             });
             
             if (response.data !== "") {
-                // Redirect to catalogue if login was successful
                 const userId = response.data.id;
                 const basket = response.data.basket;
                 setUserData({userId, basket});
                 navigate('/catalogue');
             }
-
-            //console.log(response.data); // Handle successful login
-            //console.log(response.data.id);
         } catch (error) {
             console.error('Login failed:', error);
         }

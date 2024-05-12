@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import INavbar from '../component/common/Navbar/INavbar';
-import { useUser } from '../data/UserProvider';
-import './Styles.css'; // Import CSS file for component-specific styles
-import { Link } from 'react-router-dom';
+import './Styles.css';
+
 
 function AdminView() {
-    const [accountData, setAccountData] = useState({});
     const [catalogue, setCatalogue] = useState([]);
     const [gameData, setGameData] = useState({});
     const [id, setId] = useState('');
     const [title, setTitle] = useState('');
     const [desc, setDesc] = useState('');
+    const [newTitle, setNewTitle] = useState('');
+    const [newDesc, setNewDesc] = useState('')
+    const [newId, setNewId] = useState('');
 
     const handleChange = async (id, data, selection) => {
         const formatttedData = encodeURIComponent(data)
         try {
             const respone = await axios.put(`http://localhost:8080/api/catalogue/game?id=${id}&newData=${formatttedData}&selection=${selection}`)
+            console.log(respone.data)
             setTitle('');
             setDesc('');
             fetchCatalogue();
@@ -31,6 +32,37 @@ function AdminView() {
         handleChange(id, desc, 2);
     }
 
+    const createGame = async (title, desc) => {
+        try {
+            const response = await axios({
+                method: 'post',
+                url: 'http://localhost:8080/api/catalogue/addgame',
+                data: {
+                  title: title,
+                  description: desc
+                }
+              });
+            console.log(response.data)
+            setNewDesc('')
+            setNewTitle('')
+            fetchCatalogue();
+        } catch (error) {
+            console.error(error)
+        }
+    }
+    const handleCreation = async () => {
+        createGame(newTitle, newDesc)
+    }
+    const deleteGame = async () => {
+        try {
+            const respone = await axios.delete(`http://localhost:8080/api/catalogue/deletegame/${newId}`)
+            console.log(respone.data)
+            setNewId('');
+            fetchCatalogue();
+        } catch (error) {
+            console.log(error)
+        }
+    }
     const fetchGame = async () => {
         try {
             const response = await axios.get(`http://localhost:8080/api/catalogue/${id}?token=22`)
@@ -54,7 +86,6 @@ function AdminView() {
         }
       };
     
-      // Fetch catalogue data when the component mounts
       useEffect(() => {
         fetchCatalogue();
       }, [gameData]);
@@ -63,6 +94,13 @@ function AdminView() {
         <>
         <div className='App'>
             <h1>Admin tools</h1>
+            <h2>Delete game</h2>
+            <input type="text" placeholder="Game id" value={newId} onChange={(e) => setNewId(e.target.value)} />
+            <button onClick={deleteGame}>Delete game</button>
+            <h2>Add game</h2>
+            <input type="title" placeholder="Enter title" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} />
+            <input type="description" placeholder="Enter description" value={newDesc} onChange={(e) => setNewDesc(e.target.value)} />
+            <button onClick={handleCreation}>Create game</button>
             <h2>Edit games</h2>
             <input type="text" placeholder="Game id" value={id} onChange={(e) => setId(e.target.value)} />
             <input type="title" placeholder="Title change" value={title} onChange={(e) => setTitle(e.target.value)} />

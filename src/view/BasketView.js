@@ -3,8 +3,7 @@ import axios from 'axios';
 import INavbar from '../component/common/Navbar/INavbar';
 import { useUser } from '../data/UserProvider';
 import { useNavigate } from 'react-router-dom' ;
-import './Styles.css'; // Import CSS file for component-specific styles
-import { Link } from 'react-router-dom';
+import './Styles.css';
 
 
 function BasketView() {

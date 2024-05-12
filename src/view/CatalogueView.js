@@ -1,12 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import INavbar from '../component/common/Navbar/INavbar';
-import { Link } from 'react-router-dom';
 import { useUser } from '../data/UserProvider';
 import axios from 'axios';
 import "./Styles.css";
 
 function CatalogueView() {
-  // State variable to store the catalogue data
   const [catalogue, setCatalogue] = useState([]);
   const [accountData, setAccountData] = useState([]);
   const { userData } = useUser();
@@ -25,7 +23,6 @@ function CatalogueView() {
 useEffect(() => {
   fetchAccountData();
 }, [accountData]);
-  // Function to fetch catalogue data from the API
   const fetchCatalogue = async () => {
     try {
         const response = await axios.get(`http://localhost:8080/api/catalogue?token=${encodedUserId}`);
@@ -35,14 +32,11 @@ useEffect(() => {
     }
   };
 
-  // Fetch catalogue data when the component mounts
   useEffect(() => {
     fetchCatalogue();
   }, []);
 
-  // Function to handle adding a game to the basket
   const addToBasket = async (gameId) => {
-    // Add your logic here to add the game to the basket
     const { userId } = userData;
     try {
       const response = await axios.put(`http://localhost:8080/api/users/${userId}/add/game?game=${gameId}`);
